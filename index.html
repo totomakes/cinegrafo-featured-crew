@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#22252b" />
+  <title>Cinegrafo · Featured Crew · Andre R. Guttfreund</title>
+  <meta name="description" content="Carrusel Instagram — Andre R. Guttfreund, cineasta salvadoreño-estadounidense. Featured Crew por Cinegrafo." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <p class="eyebrow">Cinegrafo · Featured Crew</p>
+      <h1>Andre R. Guttfreund</h1>
+      <p class="subtitle">Director · Producer · El Salvador</p>
+    </header>
+
+    <main>
+      <section class="carousel-section" aria-label="Carrusel Instagram">
+        <div class="phone-frame">
+          <div
+            class="carousel"
+            id="carousel"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carrusel"
+            aria-label="Slides del carrusel de Andre R. Guttfreund"
+          >
+            <div class="carousel-track" id="track">
+              <!-- slides injected -->
+            </div>
+            <button class="nav prev" id="prev" type="button" aria-label="Slide anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="nav next" id="next" type="button" aria-label="Slide siguiente">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="dots" id="dots" role="tablist" aria-label="Indicadores de slide"></div>
+            <p class="slide-label" id="slideLabel" aria-live="polite"></p>
+          </div>
+        </div>
+        <p class="hint">Desliza · flechas · ← →</p>
+      </section>
+
+      <section class="panel caption-panel">
+        <div class="panel-head">
+          <h2>Caption (ES)</h2>
+          <button type="button" class="btn ghost" id="copyCaption">Copiar</button>
+        </div>
+        <pre class="caption" id="captionText"></pre>
+      </section>
+
+      <section class="panel downloads-panel">
+        <div class="panel-head">
+          <h2>Descargas</h2>
+          <a class="btn amber" href="./public/andre-guttfreund-carousel.zip" download="andre-guttfreund-carousel.zip">Descargar todo (ZIP)</a>
+        </div>
+        <ul class="download-list" id="downloadList"></ul>
+      </section>
+
+      <section class="panel link-panel">
+        <p class="mono-label">Perfil</p>
+        <a class="profile-link" href="https://www.cinegrafo.com/profile/andre-r-guttfreund" target="_blank" rel="noopener noreferrer">
+          cinegrafo.com/profile/andre-r-guttfreund
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Cinegrafo · Featured Crew · Andre R. Guttfreund</span>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
