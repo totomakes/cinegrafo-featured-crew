@@ -23,21 +23,45 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
     },
     eve: {
       slug: "eve",
-      name: "Eve",
-      subtitle: "Featured Crew · Coming soon",
-      profileUrl: "#",
-      profilePath: "eve",
-      slides: [],
-      caption: "Slides de Eve próximamente.",
+      name: "Eve Alas Morán",
+      subtitle: "Actor / Actress · Producer · El Salvador",
+      profileUrl: "https://www.cinegrafo.com/profile/eve-alas-moran",
+      profilePath: "eve-alas-moran",
+      slides: [
+        { file: "01-cover.png", label: "01 · Cover" },
+        { file: "02-intro.png", label: "02 · Intro" },
+        { file: "03-cover-still.png", label: "03 · Cover still" },
+        { file: "04-work.png", label: "04 · Work" },
+        { file: "05-cta.png", label: "05 · CTA" },
+      ],
+      caption: `Les presentamos el trabajo de Eve Alas Morán, actriz, bailarina, cantautora y productora salvadoreña.
+
+Con BFA en Danza (Hofstra) y MFA en Acting for Film (NYFA Los Ángeles), Eve está representada por Avant Artists en LA. Campeona panamericana de gimnasia rítmica, ha protagonizado el corto Not By Choice (premio del público) y el video de Yacker. COO de BGM en Italia y Los Ángeles; actualmente escribe una serie de TV.
+
+Perfil en Cinegrafo → https://www.cinegrafo.com/profile/eve-alas-moran
+
+#Cinegrafo #PerfilDestacado #EveAlasMoran #CineSalvadoreño #Actriz #Productora #NotByChoice #ElSalvador #FilmCommunity`,
     },
     rysh: {
       slug: "rysh",
       name: "Rysh",
-      subtitle: "Featured Crew · Coming soon",
-      profileUrl: "#",
-      profilePath: "rysh",
-      slides: [],
-      caption: "Slides de Rysh próximamente.",
+      subtitle: "Director · Editor · El Salvador",
+      profileUrl: "https://www.cinegrafo.com/profile/angel-ricardo-rysh",
+      profilePath: "angel-ricardo-rysh",
+      slides: [
+        { file: "01-cover.png", label: "01 · Cover" },
+        { file: "02-intro.png", label: "02 · Intro" },
+        { file: "03-cover-still.png", label: "03 · Cover still" },
+        { file: "04-work.png", label: "04 · Work" },
+        { file: "05-cta.png", label: "05 · CTA" },
+      ],
+      caption: `Les presentamos el trabajo de Rysh (Angel Ricardo Rysh), cineasta, director, productor y editor salvadoreño.
+
+Con más de una década de experiencia desde sus primeros cortometrajes con el Colectivo Apolo 5 (fundador, 2014), ha participado en festivales en Chicago, Brasilia, San José, Panamá y París. Destacan Café Salvador (2017), Bilocación (2018) y Por eso odio a los monos (2023). Su estilo combina humor y reflexión sobre la vida cotidiana salvadoreña.
+
+Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
+
+#Cinegrafo #PerfilDestacado #Rysh #CineSalvadoreño #Director #Editor #Apolo5 #Bilocacion #ElSalvador #FilmCommunity`,
     },
   };
 
@@ -257,7 +281,7 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
 
     if (profileName) profileName.textContent = profile.name;
     if (profileSubtitle) profileSubtitle.textContent = profile.subtitle;
-    document.title = `Cinegrafo · Featured Crew · ${profile.name}`;
+    document.title = `Cinegrafo · Perfil destacado · ${profile.name}`;
     carousel.setAttribute("aria-label", `Slides del carrusel de ${profile.name}`);
 
     if (profileLink) {
