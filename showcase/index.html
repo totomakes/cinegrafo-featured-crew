@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#22252b" />
+  <title>Cinegrafo · Perfil destacado · Andre R. Guttfreund</title>
+  <meta name="description" content="Carrusel Instagram — Perfil destacado por Cinegrafo. Andre, Eve y Rysh." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <p class="eyebrow">Cinegrafo · Perfil destacado</p>
+      <h1 id="profileName">Andre R. Guttfreund</h1>
+      <p class="subtitle" id="profileSubtitle">Director · Producer · El Salvador</p>
+      <div class="profile-switcher" id="profileSwitcher" role="tablist" aria-label="Perfiles destacados">
+        <button type="button" class="profile-tab is-active" role="tab" data-profile="andre" aria-selected="true">Andre</button>
+        <button type="button" class="profile-tab" role="tab" data-profile="eve" aria-selected="false">Eve</button>
+        <button type="button" class="profile-tab" role="tab" data-profile="rysh" aria-selected="false">Rysh</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="carousel-section" aria-label="Carrusel Instagram">
+        <div class="phone-frame">
+          <div
+            class="carousel"
+            id="carousel"
+            tabindex="0"
+            role="region"
+            aria-roledescription="carrusel"
+            aria-label="Slides del carrusel de Andre R. Guttfreund"
+          >
+            <div class="carousel-track" id="track">
+              <!-- slides injected -->
+            </div>
+            <button class="nav prev" id="prev" type="button" aria-label="Slide anterior">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="nav next" id="next" type="button" aria-label="Slide siguiente">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="dots" id="dots" role="tablist" aria-label="Indicadores de slide"></div>
+            <p class="slide-label" id="slideLabel" aria-live="polite"></p>
+            <div class="empty-state" id="emptyState" hidden>Slides próximamente</div>
+          </div>
+        </div>
+        <p class="hint">Desliza · flechas · ← →</p>
+      </section>
+
+      <section class="panel caption-panel">
+        <div class="panel-head">
+          <h2>Caption (ES)</h2>
+          <button type="button" class="btn ghost" id="copyCaption">Copiar</button>
+        </div>
+        <pre class="caption" id="captionText"></pre>
+      </section>
+
+      <section class="panel downloads-panel">
+        <div class="panel-head">
+          <h2>Descargas</h2>
+        </div>
+        <ul class="download-list" id="downloadList"></ul>
+      </section>
+
+      <section class="panel link-panel">
+        <p class="mono-label">Perfil</p>
+        <a class="profile-link" id="profileLink" href="https://www.cinegrafo.com/profile/andre-r-guttfreund" target="_blank" rel="noopener noreferrer">
+          cinegrafo.com/profile/andre-r-guttfreund
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Cinegrafo · Perfil destacado</span>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
