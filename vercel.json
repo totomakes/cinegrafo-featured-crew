@@ -1,1 +1,9 @@
-{ "cleanUrls": true }
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/public/:path*",
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@main/public/:path*"
+    }
+  ]
+}

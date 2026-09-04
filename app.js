@@ -1,19 +1,47 @@
 (() => {
-  const SLIDES = [
-    { file: "01-cover.jpg", label: "01 · Cover" },
-    { file: "02-intro.jpg", label: "02 · Intro" },
-    { file: "03-cover-still.jpg", label: "03 · Cover still" },
-    { file: "04-work.jpg", label: "04 · Work" },
-    { file: "05-cta.jpg", label: "05 · CTA" },
-  ];
-
-  const CAPTION = `Les presentamos el trabajo de Andre R. Guttfreund, cineasta salvadoreño-estadounidense, egresado del AFI y ganador del Óscar® al cortometraje de ficción por En la Región del Hielo. Mentor clave del cine centroamericano y presidente de ASCINE.
+  const PROFILES = {
+    andre: {
+      slug: "andre",
+      name: "Andre R. Guttfreund",
+      subtitle: "Director · Producer · El Salvador",
+      profileUrl: "https://www.cinegrafo.com/profile/andre-r-guttfreund",
+      profilePath: "andre-r-guttfreund",
+      slides: [
+        { file: "01-cover.png", label: "01 · Cover" },
+        { file: "02-intro.png", label: "02 · Intro" },
+        { file: "03-cover-still.png", label: "03 · Cover still" },
+        { file: "04-work.png", label: "04 · Work" },
+        { file: "05-cta.png", label: "05 · CTA" },
+      ],
+      caption: `Les presentamos el trabajo de Andre R. Guttfreund, cineasta salvadoreño-estadounidense, egresado del AFI y ganador del Óscar® al cortometraje de ficción por En la Región del Hielo. Mentor clave del cine centroamericano y presidente de ASCINE.
 
 Director y productor detrás de proyectos como Femme Fatale, Relentless, Malacrianza y Cachada.
 
 Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
 
-#Cinegrafo #FeaturedCrew #AndreGuttfreund #CineSalvadoreño #CineCentroamericano #Director #Producer #AFI #Oscar #EnLaRegionDelHielo #ASCINE #ElSalvador #FilmCommunity`;
+#Cinegrafo #FeaturedCrew #AndreGuttfreund #CineSalvadoreño #CineCentroamericano #Director #Producer #AFI #Oscar #EnLaRegionDelHielo #ASCINE #ElSalvador #FilmCommunity`,
+    },
+    eve: {
+      slug: "eve",
+      name: "Eve",
+      subtitle: "Featured Crew · Coming soon",
+      profileUrl: "#",
+      profilePath: "eve",
+      slides: [],
+      caption: "Slides de Eve próximamente.",
+    },
+    rysh: {
+      slug: "rysh",
+      name: "Rysh",
+      subtitle: "Featured Crew · Coming soon",
+      profileUrl: "#",
+      profilePath: "rysh",
+      slides: [],
+      caption: "Slides de Rysh próximamente.",
+    },
+  };
+
+  const DRAG_THRESHOLD = 8;
 
   const track = document.getElementById("track");
   const dotsEl = document.getElementById("dots");
@@ -24,44 +52,81 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
   const captionText = document.getElementById("captionText");
   const copyBtn = document.getElementById("copyCaption");
   const downloadList = document.getElementById("downloadList");
+  const profileName = document.getElementById("profileName");
+  const profileSubtitle = document.getElementById("profileSubtitle");
+  const profileLink = document.getElementById("profileLink");
+  const profileSwitcher = document.getElementById("profileSwitcher");
+  const emptyState = document.getElementById("emptyState");
 
+  let currentSlug = "andre";
+  let slides = PROFILES.andre.slides;
   let index = 0;
   let pointerId = null;
   let startX = 0;
   let deltaX = 0;
   let dragging = false;
+  let dragArmed = false;
+  let dragActive = false;
 
-  function slideUrl(file) {
-    return `https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@79fc804ef01883e32f95a3a16da683fc10c66b1a/public/slides/${file}`;
+  function slideUrl(slug, file) {
+    return `./public/slides/${slug}/${file}`;
+  }
+
+  function wrapIndex(i, len) {
+    if (len <= 0) return 0;
+    return ((i % len) + len) % len;
   }
 
   function renderSlides() {
-    track.innerHTML = SLIDES.map(
-      (s, i) => `
+    if (!slides.length) {
+      track.innerHTML = "";
+      dotsEl.innerHTML = "";
+      downloadList.innerHTML = "";
+      if (emptyState) emptyState.hidden = false;
+      carousel.classList.add("is-empty");
+      slideLabel.textContent = "Sin slides";
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      return;
+    }
+
+    if (emptyState) emptyState.hidden = true;
+    carousel.classList.remove("is-empty");
+
+    const profile = PROFILES[currentSlug];
+    track.innerHTML = slides
+      .map(
+        (s, i) => `
       <figure class="slide" aria-hidden="${i === 0 ? "false" : "true"}">
-        <img src="${slideUrl(s.file)}" alt="${s.label} — Andre R. Guttfreund" draggable="false" />
+        <img src="${slideUrl(currentSlug, s.file)}" alt="${s.label} — ${profile.name}" draggable="false" />
       </figure>`
-    ).join("");
+      )
+      .join("");
 
-    dotsEl.innerHTML = SLIDES.map(
-      (s, i) =>
-        `<button type="button" class="dot" role="tab" aria-label="${s.label}" aria-selected="${i === 0}" data-index="${i}"></button>`
-    ).join("");
+    dotsEl.innerHTML = slides
+      .map(
+        (s, i) =>
+          `<button type="button" class="dot" role="tab" aria-label="${s.label}" aria-selected="${i === 0}" data-index="${i}"></button>`
+      )
+      .join("");
 
-    downloadList.innerHTML = SLIDES.map(
-      (s) => `
+    downloadList.innerHTML = slides
+      .map(
+        (s) => `
       <li>
         <div class="dl-meta">
           <span class="dl-name">${s.label}</span>
-          <span class="dl-file">${s.file}</span>
+          <span class="dl-file">${currentSlug}/${s.file}</span>
         </div>
-        <a class="btn slim" href="${slideUrl(s.file)}" download="${s.file}">JPG</a>
+        <a class="btn slim" href="${slideUrl(currentSlug, s.file)}" download="${s.file}">PNG</a>
       </li>`
-    ).join("");
+      )
+      .join("");
   }
 
   function goTo(i, { animate = true } = {}) {
-    index = Math.max(0, Math.min(SLIDES.length - 1, i));
+    if (!slides.length) return;
+    index = wrapIndex(i, slides.length);
     if (!animate) track.style.transition = "none";
     track.style.transform = `translateX(-${index * 100}%)`;
     if (!animate) {
@@ -76,37 +141,74 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
       dot.setAttribute("aria-selected", n === index ? "true" : "false");
     });
 
-    slideLabel.textContent = `${index + 1} / ${SLIDES.length} · ${SLIDES[index].label.replace(/^\d+\s·\s/, "")}`;
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === SLIDES.length - 1;
+    slideLabel.textContent = `${index + 1} / ${slides.length} · ${slides[index].label.replace(/^\d+\s·\s/, "")}`;
+    // Wrap mode: never disable ends
+    prevBtn.disabled = false;
+    nextBtn.disabled = false;
+  }
+
+  function isInteractiveTarget(el) {
+    return Boolean(el && el.closest && el.closest("button, a, .nav, .dots, .dot, .slide-label"));
   }
 
   function onPointerDown(e) {
     if (e.button != null && e.button !== 0) return;
+    if (isInteractiveTarget(e.target)) return;
+    if (!slides.length) return;
+
     pointerId = e.pointerId;
-    carousel.setPointerCapture(pointerId);
-    dragging = true;
+    dragArmed = true;
+    dragActive = false;
+    dragging = false;
     startX = e.clientX;
     deltaX = 0;
-    track.style.transition = "none";
   }
 
   function onPointerMove(e) {
-    if (!dragging || e.pointerId !== pointerId) return;
+    if ((!dragArmed && !dragging) || e.pointerId !== pointerId) return;
     deltaX = e.clientX - startX;
+
+    if (!dragActive) {
+      if (Math.abs(deltaX) < DRAG_THRESHOLD) return;
+      dragActive = true;
+      dragging = true;
+      try {
+        carousel.setPointerCapture(pointerId);
+      } catch (_) {}
+      track.style.transition = "none";
+    }
+
+    if (!dragging) return;
     const width = carousel.clientWidth || 1;
     const pct = (deltaX / width) * 100;
     track.style.transform = `translateX(calc(-${index * 100}% + ${pct}%))`;
   }
 
   function onPointerUp(e) {
-    if (!dragging || e.pointerId !== pointerId) return;
+    if (e.pointerId !== pointerId) return;
+    const wasDragging = dragging;
+    const moved = Math.abs(deltaX);
+    dragArmed = false;
     dragging = false;
+    dragActive = false;
     try {
       carousel.releasePointerCapture(pointerId);
     } catch (_) {}
     pointerId = null;
     track.style.transition = "";
+
+    if (!slides.length) {
+      deltaX = 0;
+      return;
+    }
+
+    // Tiny movement: treat as tap, not swipe
+    if (!wasDragging || moved < DRAG_THRESHOLD) {
+      goTo(index);
+      deltaX = 0;
+      return;
+    }
+
     const threshold = Math.min(80, (carousel.clientWidth || 320) * 0.18);
     if (deltaX < -threshold) goTo(index + 1);
     else if (deltaX > threshold) goTo(index - 1);
@@ -115,7 +217,7 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
   }
 
   function copyCaption() {
-    const text = CAPTION;
+    const text = PROFILES[currentSlug].caption;
     const done = () => {
       copyBtn.classList.add("copied");
       copyBtn.textContent = "Copiado";
@@ -147,24 +249,68 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
     }
   }
 
-  captionText.textContent = CAPTION;
-  renderSlides();
-  goTo(0);
+  function setProfile(slug) {
+    const profile = PROFILES[slug] || PROFILES.andre;
+    currentSlug = profile.slug;
+    slides = profile.slides;
+    index = 0;
 
-  prevBtn.addEventListener("click", () => goTo(index - 1));
-  nextBtn.addEventListener("click", () => goTo(index + 1));
+    if (profileName) profileName.textContent = profile.name;
+    if (profileSubtitle) profileSubtitle.textContent = profile.subtitle;
+    document.title = `Cinegrafo · Featured Crew · ${profile.name}`;
+    carousel.setAttribute("aria-label", `Slides del carrusel de ${profile.name}`);
+
+    if (profileLink) {
+      if (profile.profileUrl && profile.profileUrl !== "#") {
+        profileLink.href = profile.profileUrl;
+        profileLink.textContent = `cinegrafo.com/profile/${profile.profilePath}`;
+        profileLink.hidden = false;
+      } else {
+        profileLink.hidden = true;
+      }
+    }
+
+    if (profileSwitcher) {
+      [...profileSwitcher.querySelectorAll("[data-profile]")].forEach((btn) => {
+        const active = btn.dataset.profile === currentSlug;
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+        btn.classList.toggle("is-active", active);
+      });
+    }
+
+    captionText.textContent = profile.caption;
+    renderSlides();
+    goTo(0, { animate: false });
+  }
+
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    goTo(index - 1);
+  });
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    goTo(index + 1);
+  });
   dotsEl.addEventListener("click", (e) => {
+    e.stopPropagation();
     const btn = e.target.closest("[data-index]");
     if (!btn) return;
     goTo(Number(btn.dataset.index));
   });
 
-  carousel.addEventListener("pointerdown", onPointerDown);
+  // Attach drag to track so nav/dots outside track are cleaner;
+  // still guard interactive targets if events bubble from overlays.
+  track.addEventListener("pointerdown", onPointerDown);
+  track.addEventListener("pointermove", onPointerMove);
+  track.addEventListener("pointerup", onPointerUp);
+  track.addEventListener("pointercancel", onPointerUp);
+  // Also listen on carousel for moves/ups after capture moves off track
   carousel.addEventListener("pointermove", onPointerMove);
   carousel.addEventListener("pointerup", onPointerUp);
   carousel.addEventListener("pointercancel", onPointerUp);
 
   carousel.addEventListener("keydown", (e) => {
+    if (!slides.length) return;
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       goTo(index - 1);
@@ -176,10 +322,25 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
       goTo(0);
     } else if (e.key === "End") {
       e.preventDefault();
-      goTo(SLIDES.length - 1);
+      goTo(slides.length - 1);
     }
   });
 
+  // Focus carousel on click, but never steal button/link clicks
+  carousel.addEventListener("click", (e) => {
+    if (isInteractiveTarget(e.target)) return;
+    carousel.focus({ preventScroll: true });
+  });
+
   copyBtn.addEventListener("click", copyCaption);
-  carousel.addEventListener("click", () => carousel.focus({ preventScroll: true }));
+
+  if (profileSwitcher) {
+    profileSwitcher.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-profile]");
+      if (!btn) return;
+      setProfile(btn.dataset.profile);
+    });
+  }
+
+  setProfile("andre");
 })();

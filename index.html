@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#22252b" />
   <title>Cinegrafo · Featured Crew · Andre R. Guttfreund</title>
-  <meta name="description" content="Carrusel Instagram — Andre R. Guttfreund, cineasta salvadoreño-estadounidense. Featured Crew por Cinegrafo." />
+  <meta name="description" content="Carrusel Instagram — Featured Crew por Cinegrafo. Andre R. Guttfreund y más." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="page">
     <header class="site-header">
       <p class="eyebrow">Cinegrafo · Featured Crew</p>
-      <h1>Andre R. Guttfreund</h1>
-      <p class="subtitle">Director · Producer · El Salvador</p>
+      <h1 id="profileName">Andre R. Guttfreund</h1>
+      <p class="subtitle" id="profileSubtitle">Director · Producer · El Salvador</p>
+      <div class="profile-switcher" id="profileSwitcher" role="tablist" aria-label="Perfiles Featured Crew">
+        <button type="button" class="profile-tab is-active" role="tab" data-profile="andre" aria-selected="true">Andre</button>
+        <button type="button" class="profile-tab" role="tab" data-profile="eve" aria-selected="false">Eve</button>
+        <button type="button" class="profile-tab" role="tab" data-profile="rysh" aria-selected="false">Rysh</button>
+      </div>
     </header>
 
     <main>
@@ -42,6 +47,7 @@
             </button>
             <div class="dots" id="dots" role="tablist" aria-label="Indicadores de slide"></div>
             <p class="slide-label" id="slideLabel" aria-live="polite"></p>
+            <div class="empty-state" id="emptyState" hidden>Slides próximamente</div>
           </div>
         </div>
         <p class="hint">Desliza · flechas · ← →</p>
@@ -64,14 +70,14 @@
 
       <section class="panel link-panel">
         <p class="mono-label">Perfil</p>
-        <a class="profile-link" href="https://www.cinegrafo.com/profile/andre-r-guttfreund" target="_blank" rel="noopener noreferrer">
+        <a class="profile-link" id="profileLink" href="https://www.cinegrafo.com/profile/andre-r-guttfreund" target="_blank" rel="noopener noreferrer">
           cinegrafo.com/profile/andre-r-guttfreund
         </a>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>Cinegrafo · Featured Crew · Andre R. Guttfreund</span>
+      <span>Cinegrafo · Featured Crew</span>
     </footer>
   </div>
   <script src="./app.js"></script>
