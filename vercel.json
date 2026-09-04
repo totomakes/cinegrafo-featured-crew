@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/public/:path*",
-      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@e85467f7cef3c05cb974303bf6109686284f942e/public/:path*"
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@0ec8405fe5f51302674e21bf0bf1de69f557047c/public/:path*"
     }
   ]
 }
