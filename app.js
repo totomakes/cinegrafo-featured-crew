@@ -93,7 +93,7 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
   let dragActive = false;
 
   function slideUrl(slug, file) {
-    return `./public/slides/${slug}/${file}`;
+    return `https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@e85467f7cef3c05cb974303bf6109686284f942e/public/slides/${slug}/${file}`;
   }
 
   function wrapIndex(i, len) {
