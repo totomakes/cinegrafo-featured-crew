@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Schibsted Grotesk";
-  src: url("./public/fonts/schibsted.woff2") format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@79fc804ef01883e32f95a3a16da683fc10c66b1a/public/fonts/schibsted.woff2") format("woff2");
   font-weight: 400 800;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Chivo Mono";
-  src: url("./public/fonts/chivo.woff2") format("woff2");
+  src: url("https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@79fc804ef01883e32f95a3a16da683fc10c66b1a/public/fonts/chivo.woff2") format("woff2");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;

@@ -32,7 +32,7 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
   let dragging = false;
 
   function slideUrl(file) {
-    return `./slides/${file}`;
+    return `https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@79fc804ef01883e32f95a3a16da683fc10c66b1a/public/slides/${file}`;
   }
 
   function renderSlides() {
