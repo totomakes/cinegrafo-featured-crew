@@ -226,6 +226,11 @@ body {
 }
 
 .phone-frame {
+  /* IG phone mock — keep masters sharp; do not blow 1080×1350 to ~720px wide */
+  width: min(100%, 420px);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 28px;
@@ -280,7 +285,8 @@ body {
 .slide img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  image-rendering: auto;
   display: block;
   pointer-events: none;
   background: #14161a;
