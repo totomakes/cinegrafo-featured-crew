@@ -3,7 +3,7 @@
     andre: {
       slug: "andre",
       name: "Andre R. Guttfreund",
-      subtitle: "Director · Producer · El Salvador",
+      subtitle: "Director · Productor · El Salvador",
       profileUrl: "https://www.cinegrafo.com/profile/andre-r-guttfreund",
       profilePath: "andre-r-guttfreund",
       slides: [
@@ -19,12 +19,12 @@ Director y productor detrás de proyectos como Femme Fatale, Relentless, Malacri
 
 Perfil en Cinegrafo → https://www.cinegrafo.com/profile/andre-r-guttfreund
 
-#Cinegrafo #FeaturedCrew #AndreGuttfreund #CineSalvadoreño #CineCentroamericano #Director #Producer #AFI #Oscar #EnLaRegionDelHielo #ASCINE #ElSalvador #FilmCommunity`,
+#Cinegrafo #PerfilDestacado #AndreGuttfreund #CineSalvadoreño #CineCentroamericano #Director #Producer #AFI #Oscar #EnLaRegionDelHielo #ASCINE #ElSalvador #FilmCommunity`,
     },
     eve: {
       slug: "eve",
       name: "Eve Alas Morán",
-      subtitle: "Actor / Actress · Producer · El Salvador",
+      subtitle: "Actriz · Productora · El Salvador",
       profileUrl: "https://www.cinegrafo.com/profile/eve-alas-moran",
       profilePath: "eve-alas-moran",
       slides: [
