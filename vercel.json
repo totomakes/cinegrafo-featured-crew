@@ -2,6 +2,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/app.js",
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@4ce8905d83b49de9ff4e430668c94ae0c5e05b71/app.js"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@4ce8905d83b49de9ff4e430668c94ae0c5e05b71/styles.css"
+    },
+    {
       "source": "/public/:path*",
       "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@4ce8905d83b49de9ff4e430668c94ae0c5e05b71/public/:path*"
     }
