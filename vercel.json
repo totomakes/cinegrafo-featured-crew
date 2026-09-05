@@ -3,15 +3,15 @@
   "rewrites": [
     {
       "source": "/app.js",
-      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@2dece75424bd108728c1adad8973725717a1ccbe/app.js"
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@ae2f0c051575c94519c9de630f29a06b0bb620d3/app.js"
     },
     {
       "source": "/styles.css",
-      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@2dece75424bd108728c1adad8973725717a1ccbe/styles.css"
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@ae2f0c051575c94519c9de630f29a06b0bb620d3/styles.css"
     },
     {
       "source": "/public/:path*",
-      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@2dece75424bd108728c1adad8973725717a1ccbe/public/:path*"
+      "destination": "https://cdn.jsdelivr.net/gh/totomakes/cinegrafo-featured-crew@ae2f0c051575c94519c9de630f29a06b0bb620d3/public/:path*"
     }
   ]
 }
