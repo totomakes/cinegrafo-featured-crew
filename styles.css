@@ -226,15 +226,15 @@ body {
 }
 
 .phone-frame {
-  /* IG phone mock — keep masters sharp; do not blow 1080×1350 to ~720px wide */
-  width: min(100%, 420px);
-  max-width: 420px;
+  /* Contained IG phone mock — fit inside the browser window */
+  width: fit-content;
+  max-width: min(340px, 100%);
   margin-left: auto;
   margin-right: auto;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 28px;
-  padding: 0.85rem;
+  padding: 0.65rem;
   box-shadow: var(--shadow);
 }
 
@@ -244,6 +244,10 @@ body {
   border-radius: 18px;
   background: #14161a;
   aspect-ratio: 4 / 5;
+  /* Cap by viewport height so the whole card is visible without scrolling past it */
+  width: min(340px, 100%, calc((100dvh - 240px) * 4 / 5));
+  max-height: calc(100dvh - 240px);
+  height: auto;
   outline: none;
 }
 
