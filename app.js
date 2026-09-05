@@ -148,15 +148,26 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
       .join("");
   }
 
+  function slideWidth() {
+    return carousel.clientWidth || 1;
+  }
+
+  function setTrackOffset(px, { animate = true } = {}) {
+    if (animate) {
+      track.style.transition = "";
+      track.style.transform = "translateX(" + px + "px)";
+      return;
+    }
+    track.style.transition = "none";
+    track.style.transform = "translateX(" + px + "px)";
+    void track.offsetWidth;
+    track.style.transition = "";
+  }
+
   function goTo(i, { animate = true } = {}) {
     if (!slides.length) return;
     index = wrapIndex(i, slides.length);
-    if (!animate) track.style.transition = "none";
-    track.style.transform = `translateX(-${index * 100}%)`;
-    if (!animate) {
-      void track.offsetWidth;
-      track.style.transition = "";
-    }
+    setTrackOffset(-index * slideWidth(), { animate });
 
     [...track.children].forEach((el, n) => {
       el.setAttribute("aria-hidden", n === index ? "false" : "true");
@@ -165,8 +176,8 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
       dot.setAttribute("aria-selected", n === index ? "true" : "false");
     });
 
-    slideLabel.textContent = `${index + 1} / ${slides.length} · ${slides[index].label.replace(/^\d+\s·\s/, "")}`;
-    // Wrap mode: never disable ends
+    const label = slides[index].label.replace(/^\d+\s·\s/, "");
+    slideLabel.textContent = (index + 1) + " / " + slides.length + " · " + label;
     prevBtn.disabled = false;
     nextBtn.disabled = false;
   }
@@ -203,9 +214,8 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
     }
 
     if (!dragging) return;
-    const width = carousel.clientWidth || 1;
-    const pct = (deltaX / width) * 100;
-    track.style.transform = `translateX(calc(-${index * 100}% + ${pct}%))`;
+    const width = slideWidth();
+    track.style.transform = "translateX(" + (-index * width + deltaX) + "px)";
   }
 
   function onPointerUp(e) {
@@ -365,6 +375,10 @@ Perfil en Cinegrafo → https://www.cinegrafo.com/profile/angel-ricardo-rysh
       setProfile(btn.dataset.profile);
     });
   }
+
+  window.addEventListener("resize", () => {
+    goTo(index, { animate: false });
+  });
 
   setProfile("andre");
 })();
