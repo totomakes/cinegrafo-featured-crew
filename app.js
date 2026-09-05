@@ -57,7 +57,7 @@
       slug: "armando-rodriguez-lopez",
       tab: "Armando",
       name: "Armando Dago",
-      subtitle: "Director · Df · El Salvador",
+      subtitle: "Director · DP · El Salvador",
       profileUrl: "https://www.cinegrafo.com/profile/armando-rodriguez-lopez",
       profilePath: "armando-rodriguez-lopez",
       slides: [
@@ -68,7 +68,7 @@
         { file: "05-gallery.png", label: "05 · Gallery" },
         { file: "06-cta.png", label: "06 · CTA" }
       ],
-      caption: "Les presentamos el trabajo de Armando Dago, director · df.\n\nProductor de contenido audiovisual, con experiencia en uso de equipo filmográfico, manejo de software de edición de video, master y edición de audio, animación y colorización. Creador de contenido narrativo y storytelling, con mucha experiencia en rodaje y técnicas cinematográficas.\n\nPerfil en Cinegrafo → https://www.cinegrafo.com/profile/armando-rodriguez-lopez\n\n#Cinegrafo #PerfilDestacado #ArmandoDago #CineSalvadoreño #CineCentroamericano #ElSalvador #FilmCommunity",
+      caption: "Les presentamos el trabajo de Armando Dago, director · dp.\n\nProductor de contenido audiovisual, con experiencia en uso de equipo filmográfico, manejo de software de edición de video, master y edición de audio, animación y colorización. Creador de contenido narrativo y storytelling, con mucha experiencia en rodaje y técnicas cinematográficas.\n\nPerfil en Cinegrafo → https://www.cinegrafo.com/profile/armando-rodriguez-lopez\n\n#Cinegrafo #PerfilDestacado #ArmandoDago #CineSalvadoreño #CineCentroamericano #ElSalvador #FilmCommunity",
     },
     "lourdes-sandoval": {
       slug: "lourdes-sandoval",
@@ -282,13 +282,47 @@
     return `./public/slides/${slug}/${file}`;
   }
 
+  const mobileSwitcher = document.getElementById("mobileProfileSwitcher");
+  const profilesToggle = document.getElementById("profilesToggle");
+  const mobileDrawer = document.getElementById("mobileProfileDrawer");
+
+  function roleLine(profile) {
+    // Short role line: drop trailing country segment from subtitle
+    const parts = String(profile.subtitle || "").split("·").map((s) => s.trim()).filter(Boolean);
+    if (parts.length <= 1) return profile.subtitle || "";
+    // Drop last if it looks like a country
+    const last = parts[parts.length - 1].toLowerCase();
+    if (last.includes("salvador") || last.includes("guatemala") || last.length < 18) {
+      return parts.slice(0, -1).join(" · ");
+    }
+    return parts.join(" · ");
+  }
+
+  function profileButtonHtml(slug) {
+    const p = PROFILES[slug];
+    const active = slug === currentSlug;
+    const role = roleLine(p);
+    return `<button type="button" class="profile-item${active ? " is-active" : ""}" role="tab" data-profile="${slug}" aria-selected="${active ? "true" : "false"}"><span class="profile-item-name">${p.name}</span><span class="profile-item-role">${role}</span></button>`;
+  }
+
   function buildSwitcher() {
-    if (!profileSwitcher) return;
-    profileSwitcher.innerHTML = PROFILE_ORDER.map((slug) => {
-      const p = PROFILES[slug];
-      const active = slug === currentSlug;
-      return `<button type="button" class="profile-tab${active ? " is-active" : ""}" role="tab" data-profile="${slug}" aria-selected="${active ? "true" : "false"}">${p.tab}</button>`;
-    }).join("");
+    const html = PROFILE_ORDER.map(profileButtonHtml).join("");
+    if (profileSwitcher) profileSwitcher.innerHTML = html;
+    if (mobileSwitcher) mobileSwitcher.innerHTML = html;
+  }
+
+  function syncSwitcherActive() {
+    document.querySelectorAll("[data-profile]").forEach((btn) => {
+      const active = btn.dataset.profile === currentSlug;
+      btn.setAttribute("aria-selected", active ? "true" : "false");
+      btn.classList.toggle("is-active", active);
+    });
+  }
+
+  function closeMobileDrawer() {
+    if (!mobileDrawer || !profilesToggle) return;
+    mobileDrawer.hidden = true;
+    profilesToggle.setAttribute("aria-expanded", "false");
   }
 
   function renderSlides() {
@@ -439,13 +473,8 @@
       }
     }
 
-    if (profileSwitcher) {
-      [...profileSwitcher.querySelectorAll("[data-profile]")].forEach((btn) => {
-        const active = btn.dataset.profile === currentSlug;
-        btn.setAttribute("aria-selected", active ? "true" : "false");
-        btn.classList.toggle("is-active", active);
-      });
-    }
+    syncSwitcherActive();
+    closeMobileDrawer();
 
     captionText.textContent = profile.caption;
     renderSlides();
@@ -503,12 +532,21 @@
 
   copyBtn.addEventListener("click", copyCaption);
 
-  if (profileSwitcher) {
-    profileSwitcher.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-profile]");
-      if (!btn) return;
-      setProfile(btn.dataset.profile);
-      btn.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  function onProfilePick(e) {
+    const btn = e.target.closest("[data-profile]");
+    if (!btn) return;
+    setProfile(btn.dataset.profile);
+    btn.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+  }
+
+  if (profileSwitcher) profileSwitcher.addEventListener("click", onProfilePick);
+  if (mobileSwitcher) mobileSwitcher.addEventListener("click", onProfilePick);
+
+  if (profilesToggle && mobileDrawer) {
+    profilesToggle.addEventListener("click", () => {
+      const open = mobileDrawer.hidden;
+      mobileDrawer.hidden = !open;
+      profilesToggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
