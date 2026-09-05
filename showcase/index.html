@@ -4,20 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#22252b" />
-  <title>Cinegrafo · Perfil destacado · Andre R. Guttfreund</title>
-  <meta name="description" content="Carrusel Instagram — Perfil destacado por Cinegrafo. Andre, Eve y Rysh." />
+  <title>Cinegrafo · Perfil destacado · Adriana Morán</title>
+  <meta name="description" content="Carrusel Instagram — Perfiles destacados por Cinegrafo." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="page">
     <header class="site-header">
       <p class="eyebrow">Cinegrafo · Perfil destacado</p>
-      <h1 id="profileName">Andre R. Guttfreund</h1>
-      <p class="subtitle" id="profileSubtitle">Director · Producer · El Salvador</p>
+      <h1 id="profileName">Adriana Morán</h1>
+      <p class="subtitle" id="profileSubtitle">Productora · Guionista · El Salvador</p>
       <div class="profile-switcher" id="profileSwitcher" role="tablist" aria-label="Perfiles destacados">
-        <button type="button" class="profile-tab is-active" role="tab" data-profile="andre" aria-selected="true">Andre</button>
-        <button type="button" class="profile-tab" role="tab" data-profile="eve" aria-selected="false">Eve</button>
-        <button type="button" class="profile-tab" role="tab" data-profile="rysh" aria-selected="false">Rysh</button>
+        <!-- tabs injected -->
       </div>
     </header>
 
@@ -27,12 +25,16 @@
           <div
             class="carousel"
             id="carousel"
-            tabindex="0"
             role="region"
             aria-roledescription="carrusel"
-            aria-label="Slides del carrusel de Andre R. Guttfreund"
+            aria-label="Carrusel Instagram de Adriana Morán"
           >
-            <div class="carousel-track" id="track">
+            <div
+              class="carousel-viewport"
+              id="viewport"
+              tabindex="0"
+              aria-label="Slides de Adriana Morán"
+            >
               <!-- slides injected -->
             </div>
             <button class="nav prev" id="prev" type="button" aria-label="Slide anterior">
@@ -70,8 +72,8 @@
 
       <section class="panel link-panel">
         <p class="mono-label">Perfil</p>
-        <a class="profile-link" id="profileLink" href="https://www.cinegrafo.com/profile/andre-r-guttfreund" target="_blank" rel="noopener noreferrer">
-          cinegrafo.com/profile/andre-r-guttfreund
+        <a class="profile-link" id="profileLink" href="https://www.cinegrafo.com/profile/adriana-moran-3" target="_blank" rel="noopener noreferrer">
+          cinegrafo.com/profile/adriana-moran-3
         </a>
       </section>
     </main>
